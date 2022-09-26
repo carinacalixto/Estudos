@@ -16,4 +16,4 @@ while(not acertou and not enforcou):
             letras_acertadas[posicao] = letra
         posicao = posicao + 1
 
-print('****** FIM ******')
+print('****** FIM *******')
