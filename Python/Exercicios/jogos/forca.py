@@ -72,8 +72,13 @@ def jogar():
         enforcou = erros >= 6
 
     if (acertou):
+        print()
+        print(letras_acertadas)
+        print('A palavra secreta era: ', palavra_secreta)
         print("\nParabéns! Você VENCEU! \o/")
     elif(enforcou):
+        print()
+        print('A palavra secreta era: ', palavra_secreta)
         print("\nVocê PERDEU! :(")
 
     print('\n****** FIM ******')
