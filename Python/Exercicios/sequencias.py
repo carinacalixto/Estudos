@@ -8,15 +8,28 @@ print(lista)
 
 # Imprima o maior elemento
 print("O maior elemento: ",max(lista))
+# ou
+maior = lista[0]
+for i in range(0,len(lista)):
+    if(lista[i] > maior):
+        maior = lista[i]
+print("Outra forma de encontrar o maior elemento: ", maior)
 
 # Imprima o menor elemento
 print("O menor elemento: ", min(lista))
+# ou
+menor = lista[0]
+for i in range(0,len(lista)):
+    if(lista[i] < menor):
+        menor = lista[i]
+print("Outra forma de encontrar o menor elemento: ", menor)
 
 # Imprima os números pares
-print("Os pares:")
+pares = []
 for i in lista:
     if (i%2==0):
-        print(i)
+        pares.append(i)
+print("Os pares: ", pares)
         
 # Imprima o número de ocorrências do 1 elemento da lista
 primeiro = lista[0]
@@ -24,7 +37,6 @@ ocorrencias = 0
 for a in lista:
     if (a == primeiro):
         ocorrencias += 1
-
 print("Ocorrencias do 1 elemento na lista: ", ocorrencias)
 
 # Imprima a média dos elementos
