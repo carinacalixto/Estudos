@@ -1,11 +1,26 @@
+import random
+import os
+
 def jogar():
+
+    path = os.getcwd()+'\\Python\\Exercicios\\jogos\\forca\\palavras.txt'
+
+    arquivo = open(path, 'r')
+    palavras = []
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
+    arquivo.close()
+
+    num_palavra = random.randrange(0,len(palavras))
+
     print('*****************')
     print('* Jogo da FORCA *')
     print('*****************')
 
     letras_escolhidas = []
-    palavra_secreta = 'banana'
-    letras_acertadas = ['_', '_', '_', '_', '_', '_']
+    palavra_secreta = palavras[num_palavra].upper()
+    letras_acertadas = ['_' for letra in palavra_secreta]
     acertou = False
     enforcou = False
     repetida = False
@@ -15,12 +30,13 @@ def jogar():
         print()
         print(letras_acertadas)
         chute = input('Escolha uma letra: ')
+        chute = chute.upper()
         if(chute not in letras_escolhidas):
             letras_escolhidas.append(chute)
             if(chute in palavra_secreta):
                 posicao = 0
                 for letra in palavra_secreta:
-                    if (chute.lower() == letra.lower()):
+                    if (chute == letra):
                         letras_acertadas[posicao] = letra
                     posicao += 1
             else:
