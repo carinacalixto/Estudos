@@ -38,11 +38,6 @@ def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
 
 def imprime_erro(err):
     err += 1
-    #     ___  
-    #    |   O
-    #    |  /|\
-    #    |  / \
-    #   _|_
     print("ERROU!! \n")
     if(err == 1):
         print('  ___')
