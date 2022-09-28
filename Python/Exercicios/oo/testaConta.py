@@ -1,4 +1,5 @@
 from conta import Conta
+from cliente import Cliente
 
 # conta = Conta('123-4', 'João', 120.0, 1000.0)
 
@@ -13,8 +14,8 @@ from conta import Conta
 #     print("Saque não efetivado!")
 # conta.extrato()
 
-c1 = Conta('127-4', 'Maria', 10.0, 200.0)
-c2 = Conta('136-9', 'Carina', 1500.0, 2000.0)
+# c1 = Conta('127-4', 'Maria', 10.0, 200.0)
+# c2 = Conta('136-9', 'Carina', 1500.0, 2000.0)
 
 # print(id(c2))
 # print(id(c1))
@@ -26,7 +27,7 @@ c2 = Conta('136-9', 'Carina', 1500.0, 2000.0)
 # c1.deposita(500)
 # print(c2.saldo)
 
-c3 = Conta('127-4', 'Maria', 10.0, 200.0) # Apesar de ter os msms atributos de c1 a pos de memoria é diferente, logo em teste do if são diferentes.
+#c3 = Conta('127-4', 'Maria', 10.0, 200.0) # Apesar de ter os msms atributos de c1 a pos de memoria é diferente, logo em teste do if são diferentes.
 
 # if(c1 == c3):
 #     print('são iguais')
@@ -39,3 +40,9 @@ c3 = Conta('127-4', 'Maria', 10.0, 200.0) # Apesar de ter os msms atributos de c
 
 # c4 = Conta('456-3', 'Ana', 235.00)
 # c4.toPrint()
+
+cliente1 = Cliente('Carina', 'Calixto', '123.456.789-01')
+
+conta1 = Conta('123-4', cliente1, 120.00)
+
+conta1.toPrint()

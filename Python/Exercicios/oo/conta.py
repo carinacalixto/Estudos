@@ -1,8 +1,12 @@
 class Conta:
     
-    def __init__(self, numero, titular, saldo, limite=1000.00):
+    # Uma conta TEM um cliente
+    # Classe cliente existe sem uma conta
+    # Isso é uma agregação
+
+    def __init__(self, numero, cliente, saldo, limite=1000.00):
         self.numero = numero
-        self.titular = titular
+        self.titular = cliente
         self.saldo = saldo
         self.limite = limite
 
@@ -27,4 +31,4 @@ class Conta:
             return False
     
     def toPrint(self):
-        print('\n\nconta nro: {}\ntitular: {}\nsaldo: {}\nlimite: {}\n'.format(self.numero, self.titular, self.saldo, self.limite))
+        print('\n\nconta nro: {}\ntitular: {}\nsaldo: {}\nlimite: {}\n'.format(self.numero, self.titular.nome, self.saldo, self.limite))
