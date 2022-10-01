@@ -41,12 +41,18 @@ from cliente import Cliente
 # c4 = Conta('456-3', 'Ana', 235.00)
 # c4.toPrint()
 
-# cliente1 = Cliente('Carina', 'Calixto', '143.140.210-98')
-# cliente2 = Cliente('Ana Maria', 'Azevedo', '883.956.700-36')
+cliente1 = Cliente('Carina', 'Calixto', '143.140.210-98')
+cliente2 = Cliente('Ana Maria', 'Azevedo', '883.956.700-36')
 # cliente3 = Cliente('João', 'Oliveira', '266.982.070-04')
 
-# conta1 = Conta('123-4', cliente1, 1200.00)
-# conta2 = Conta('453-9', cliente2, 2000.00)
+conta1 = Conta('123-4', cliente1, 1200.00)
+
+print("TOTAL CONTAS: ",conta1.get_total_contas())
+
+conta2 = Conta('453-9', cliente2, 2000.00)
+
+print("TOTAL CONTAS: ",Conta.get_total_contas())
+
 # conta3 = Conta('978-3', cliente3, 2500.00)
 
 # conta1.deposita(100.0)
@@ -55,3 +61,5 @@ from cliente import Cliente
 # conta1.extrato()
 
 # conta1.historico.log()
+
+# conta1.saldo = -100
