@@ -11,6 +11,7 @@
 # 6) Adicione um atributo identificador na classe Conta, esse identificador deve ter um valor
 # único para cada instancia de conta. 
 
+from unicodedata import name
 from historico import Historico
 
 class Conta:
@@ -98,3 +99,10 @@ class Conta:
             return True
         else:
             return False
+
+if __name__ == '__main__':
+    conta = Conta('João', 1000.00, 1500.00)
+    print(conta.numero)
+    print(conta.titular)
+    print(conta.saldo)
+    print(conta.limite)
