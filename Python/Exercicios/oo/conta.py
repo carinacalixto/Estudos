@@ -77,7 +77,7 @@ class Conta:
             self._saldo -= valor
             self._historico.insere('Saque de R${}'.format(valor))
             return True
-        else:
+        else :
             return False
         
     def extrato(self) -> None:
