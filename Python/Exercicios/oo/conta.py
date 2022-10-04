@@ -14,11 +14,11 @@ class Conta:
         return True
     
     def saca(self,valor) -> bool:
-        if( valor <= self.saldo + self.limite ):
+        if valor <= self.saldo + self.limite :
             self.saldo -= valor
             self.historico.insere('Saque de R${}'.format(valor))
             return True
-        else:
+        else :
             return False
         
     def extrato(self) -> None:
