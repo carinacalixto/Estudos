@@ -7,7 +7,10 @@ class ControleDeBonificacoes:
         self._total_bonificacoes = total_bonificacoes
     
     def registra(self, funcionario):
-        self._total_bonificacoes += funcionario.get_bonificacao()
+        try:
+            self._total_bonificacoes += funcionario.get_bonificacao()
+        except AttributeError as e:
+            print(e)
     
     @property
     def total_bonificacoes(self):
