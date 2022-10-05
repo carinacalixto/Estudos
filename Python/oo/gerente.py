@@ -19,4 +19,6 @@ class Gerente(Funcionario):
             print('Acesso NEGADO')
             return False
 
+    def get_bonificacao(self):
+        return super().get_bonificacao() + 1000.00
     # Outros métodos comuns a funcionário
