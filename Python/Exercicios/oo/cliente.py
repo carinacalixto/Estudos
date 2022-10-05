@@ -8,6 +8,6 @@ class Cliente:
         self.sobrenome = sobrenome
         self.cpf = cpf
 
-    def toString(self) -> str:
-        s = '- Nome: '+self.nome+'\n- Sobrenome: '+self.sobrenome+'\n- cpf: '+self.cpf+'\n'
-        return s
+    def __str__(self) -> str:
+        return ("\n- Nome: {}\n- Sobrenome: {}\n- cpf: {}"
+        .format(self.nome, self.sobrenome, self.cpf))

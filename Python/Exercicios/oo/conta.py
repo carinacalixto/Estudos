@@ -11,7 +11,7 @@
 # 6) Adicione um atributo identificador na classe Conta, esse identificador deve ter um valor
 # único para cada instancia de conta. 
 
-from unicodedata import name
+from cliente import Cliente
 from historico import Historico
 
 class Conta:
@@ -100,9 +100,53 @@ class Conta:
         else:
             return False
 
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa
+        return self._saldo
+        
+    def __str__(self) -> str:
+        return "Dados da Conta:\nNumero: {}\nTitular: {}\nSaldo: {}\nLimite: {}" .format(self._numero, self._titular, self._saldo, self._limite)
+
+class ContaCorrente(Conta):
+    
+    def atualiza(self, taxa):
+        super().atualiza(taxa*2)
+        # self._saldo += self._saldo * taxa * 2
+        return self._saldo
+        
+    def deposita(self, valor) -> bool:
+        self._saldo += valor - 0.10
+        self._historico.insere('Depósito de R${}.\nCobrada taxa de R$0.10'.format(valor))
+        return True
+
+class ContaPoupanca(Conta):
+    
+    def atualiza(self, taxa):
+        super().atualiza(taxa*3)
+        # self._saldo += self._saldo * taxa * 3
+        return self._saldo
+
 if __name__ == '__main__':
-    conta = Conta('João', 1000.00, 1500.00)
-    print(conta.numero)
-    print(conta.titular)
+    
+    c1 = Cliente('João', 'Manoel', '111.111.111-11')
+    c2 = Cliente('José', 'Santos', '222.222.222-22')
+    c3 = Cliente('Maria', 'Madalena', '333.333.333-33')
+    
+    conta = Conta(c1, 1000.00, 1500.00)
+    cc = ContaCorrente(c2, 1000.00, 1500)
+    cp = ContaPoupanca(c3, 1000.00, 1500)
+    # print(conta.numero)
+    # print(conta.titular)
+    # print(conta.saldo)
+    # print(conta.limite)
+    conta.atualiza(0.01)
+    cc.atualiza(0.01)
+    cp.atualiza(0.01)
+    
     print(conta.saldo)
-    print(conta.limite)
+    print(cc.saldo)
+    print(cp.saldo)
+    
+    print(conta)
+    print(cc)
+    print(cp)
