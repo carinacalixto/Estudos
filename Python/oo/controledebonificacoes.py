@@ -3,7 +3,7 @@ from funcionario import Funcionario
 
 class ControleDeBonificacoes:
     
-    def __init__(self, total_bonificacoes) -> None:
+    def __init__(self, total_bonificacoes=0) -> None:
         self._total_bonificacoes = total_bonificacoes
     
     def registra(self, funcionario):

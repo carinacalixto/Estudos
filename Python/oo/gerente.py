@@ -1,7 +1,7 @@
 # Criando uma classe Gerente que possua os mesmos métodos e atributos de Funcionário, 
 # porém com informações adicionais.
 
-from Python.oo.funcionario import Funcionario
+from funcionario import Funcionario
 
 class Gerente(Funcionario):
     
