@@ -11,10 +11,11 @@
 # 6) Adicione um atributo identificador na classe Conta, esse identificador deve ter um valor
 # único para cada instancia de conta. 
 
+import abc
 from cliente import Cliente
 from historico import Historico
 
-class Conta:
+class Conta(abc.ABC):
 
     __slots__ = ['_numero', '_titular', '_saldo', '_limite', '_historico', 'identificador']
 
@@ -29,6 +30,7 @@ class Conta:
         self._saldo = saldo
         self._limite = limite
         self._historico = Historico()
+        self._tipo = "Conta"
 
     @property
     def saldo(self):
@@ -100,18 +102,25 @@ class Conta:
         else:
             return False
 
-    def atualiza(self, taxa):
-        self._saldo += self._saldo * taxa
-        return self._saldo
+    @abc.abstractmethod
+    def atualiza():
+        pass
+    # def atualiza(self, taxa):
+    #     self._saldo += self._saldo * taxa
+    #     return self._saldo
         
     def __str__(self) -> str:
-        return "Dados da Conta:\nNumero: {}\nTitular: {}\nSaldo: {}\nLimite: {}" .format(self._numero, self._titular, self._saldo, self._limite)
+        return "Dados da Conta:\nTipo: {}\nNumero: {}\nTitular: {}\nSaldo: {}\nLimite: {}" .format(self._tipo, self._numero, self._titular, self._saldo, self._limite)
 
 class ContaCorrente(Conta):
     
+    def __init__(self, cliente, saldo, limite) -> None:
+        super().__init__(cliente, saldo, limite)
+        self._tipo = 'Conta Corrente'
+    
     def atualiza(self, taxa):
-        super().atualiza(taxa*2)
-        # self._saldo += self._saldo * taxa * 2
+        # super().atualiza(taxa*2)
+        self._saldo += self._saldo * taxa * 2
         return self._saldo
         
     def deposita(self, valor) -> bool:
@@ -121,10 +130,23 @@ class ContaCorrente(Conta):
 
 class ContaPoupanca(Conta):
     
+    def __init__(self, cliente, saldo, limite) -> None:
+        super().__init__(cliente, saldo, limite)
+        self._tipo = "Conta Poupança"
+    
     def atualiza(self, taxa):
-        super().atualiza(taxa*3)
-        # self._saldo += self._saldo * taxa * 3
+        # super().atualiza(taxa*3)
+        self._saldo += self._saldo * taxa * 3
         return self._saldo
+    
+class ContaInvestimento(Conta):
+    
+    def __init__(self, cliente, saldo, limite) -> None:
+        super().__init__(cliente, saldo, limite)
+        self._tipo = "Conta Investimento"
+    
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa * 5
 
 if __name__ == '__main__':
     
@@ -132,21 +154,25 @@ if __name__ == '__main__':
     c2 = Cliente('José', 'Santos', '222.222.222-22')
     c3 = Cliente('Maria', 'Madalena', '333.333.333-33')
     
-    conta = Conta(c1, 1000.00, 1500.00)
+    # conta = Conta(c1, 1000.00, 1500.00)
     cc = ContaCorrente(c2, 1000.00, 1500)
     cp = ContaPoupanca(c3, 1000.00, 1500)
+    ci = ContaInvestimento(c1, 1000.00, 1500)
     # print(conta.numero)
     # print(conta.titular)
     # print(conta.saldo)
     # print(conta.limite)
-    conta.atualiza(0.01)
+    # conta.atualiza(0.01)
     cc.atualiza(0.01)
     cp.atualiza(0.01)
+    ci.atualiza(0.01)
     
-    print(conta.saldo)
+    # print(conta.saldo)
     print(cc.saldo)
     print(cp.saldo)
+    print(ci.saldo)
     
-    print(conta)
+    # print(conta)
     print(cc)
     print(cp)
+    print(ci)
