@@ -1,6 +1,9 @@
-class Cliente:
+from autenticavel import Autenticavel
 
-    def __init__(self, nome, sobrenome, cpf) -> None:
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.cpf = cpf
+class Cliente(Autenticavel):
+
+    def __init__(self, nome, sobrenome, cpf, senha) -> None:
+        self._nome = nome
+        self._sobrenome = sobrenome
+        self._cpf = cpf
+        self._senha = senha

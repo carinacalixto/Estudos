@@ -1,9 +1,10 @@
 # Criando uma classe Gerente que possua os mesmos métodos e atributos de Funcionário, 
 # porém com informações adicionais.
 
+from autenticavel import Autenticavel
 from funcionario import Funcionario
 
-class Gerente(Funcionario):
+class Gerente(Funcionario, Autenticavel):
     
     def __init__(self, nome, cpf, salario, senha, qtd_gerenciados) -> None:
         # Funcionario.__init__(nome, cpf, salario)
