@@ -4,7 +4,7 @@
 from autenticavel import Autenticavel
 from funcionario import Funcionario
 
-class Gerente(Funcionario, Autenticavel):
+class Gerente(Funcionario):
     
     def __init__(self, nome, cpf, salario, senha, qtd_gerenciados) -> None:
         # Funcionario.__init__(nome, cpf, salario)

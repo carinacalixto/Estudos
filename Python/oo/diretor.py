@@ -1,7 +1,7 @@
 from autenticavel import Autenticavel
 from funcionario import Funcionario
 
-class Diretor(Funcionario, Autenticavel):
+class Diretor(Funcionario):
     
     def __init__(self, nome, cpf, salario, senha) -> None:
         super().__init__(nome, cpf, salario)
