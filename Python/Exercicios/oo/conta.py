@@ -12,7 +12,7 @@
 # único para cada instancia de conta. 
 
 import abc
-from tributavel import TributavelMixIn
+from tributavel import Tributavel
 from cliente import Cliente
 from historico import Historico
 
@@ -113,13 +113,13 @@ class Conta(abc.ABC):
     def __str__(self) -> str:
         return "Dados da Conta:\nTipo: {}\nNumero: {}\nTitular: {}\nSaldo: {}\nLimite: {}" .format(self._tipo, self._numero, self._titular, self._saldo, self._limite)
 
-class ContaCorrente(Conta, TributavelMixIn):
+class ContaCorrente(Conta):
     
     def __init__(self, cliente, saldo, limite) -> None:
         super().__init__(cliente, saldo, limite)
         self._tipo = 'Conta Corrente'
     
-    # MixIn
+    # Implementação do método abstrato
     def get_valor_imposto(self):
         return self._saldo * 0.01
     
@@ -152,6 +152,9 @@ class ContaInvestimento(Conta):
     
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa * 5
+        
+    def get_valor_imposto(self):
+        return self._saldo * 0.03
 
 if __name__ == '__main__':
     
