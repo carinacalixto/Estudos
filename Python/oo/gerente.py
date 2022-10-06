@@ -22,3 +22,7 @@ class Gerente(Funcionario):
     def get_bonificacao(self):
         return super().get_bonificacao() + 1000.00
     # Outros métodos comuns a funcionário
+    
+if __name__ == '__main__':
+    g = Gerente('Manoel', '111.111.111-11', 5000.00, '12345', 12)
+    print(g.get_bonificacao())

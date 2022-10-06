@@ -1,7 +1,7 @@
 from gerente import Gerente
 from funcionario import Funcionario
 
-class ControleDeBonificacoes:
+class ControleDeBonificacoes():
     
     def __init__(self, total_bonificacoes=0) -> None:
         self._total_bonificacoes = total_bonificacoes
@@ -10,6 +10,7 @@ class ControleDeBonificacoes:
         try:
             self._total_bonificacoes += funcionario.get_bonificacao()
         except AttributeError as e:
+            print('Instancia de {} não implementa o método get_bonificacao()'.format(self.__class__.__name__))
             print(e)
     
     @property
