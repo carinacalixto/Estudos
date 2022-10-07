@@ -129,7 +129,7 @@ class ContaCorrente(Conta):
         return self._saldo
         
     def deposita(self, valor) -> bool:
-        self._saldo += valor - 0.10
+        self._saldo += valor #- 0.10 Comentando o trecho da taxa de 0.10 por depósito
         self._historico.insere('Depósito de R${}.\nCobrada taxa de R$0.10'.format(valor))
         return True
 
@@ -162,25 +162,30 @@ if __name__ == '__main__':
     c2 = Cliente('José', 'Santos', '222.222.222-22')
     c3 = Cliente('Maria', 'Madalena', '333.333.333-33')
     
+    
     # conta = Conta(c1, 1000.00, 1500.00)
-    cc = ContaCorrente(c2, 1000.00, 1500)
-    cp = ContaPoupanca(c3, 1000.00, 1500)
-    ci = ContaInvestimento(c1, 1000.00, 1500)
+    cc = ContaCorrente(c2, 100.00, 0)
+    
+    if (not cc.saca(300.00)):
+        print("Saque não efetuado")
+    cc.historico.log()
+    # cp = ContaPoupanca(c3, 1000.00, 1500)
+    # ci = ContaInvestimento(c1, 1000.00, 1500)
     # print(conta.numero)
     # print(conta.titular)
     # print(conta.saldo)
     # print(conta.limite)
     # conta.atualiza(0.01)
-    cc.atualiza(0.01)
-    cp.atualiza(0.01)
-    ci.atualiza(0.01)
+    # cc.atualiza(0.01)
+    # cp.atualiza(0.01)
+    # ci.atualiza(0.01)
     
     # print(conta.saldo)
-    print(cc.saldo)
-    print(cp.saldo)
-    print(ci.saldo)
+    # print(cc.saldo)
+    # print(cp.saldo)
+    # print(ci.saldo)
     
     # print(conta)
-    print(cc)
-    print(cp)
-    print(ci)
+    # print(cc)
+    # print(cp)
+    # print(ci)
