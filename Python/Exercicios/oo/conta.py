@@ -12,6 +12,7 @@
 # único para cada instancia de conta. 
 
 import abc
+from excecoes import SaldoInsuficienteError
 from tributavel import Tributavel
 from cliente import Cliente
 from historico import Historico
@@ -72,17 +73,25 @@ class Conta(abc.ABC):
         pass
 
     def deposita(self,valor) -> bool:
-        self._saldo += valor
-        self._historico.insere('Depósito de R${}'.format(valor))
-        return True
+        if (valor < 0):
+            raise ValueError('Você tentou depositar um valor negativo.')
+        else:
+            self._saldo += valor
+            self._historico.insere('Depósito de R${}'.format(valor))
+            return True
     
     def saca(self,valor) -> bool:
-        if( valor <= self._saldo + self._limite ):
-            self._saldo -= valor
-            self._historico.insere('Saque de R${}'.format(valor))
-            return True
-        else :
-            return False
+        if(valor < 0):
+            raise ValueError("Você tentou sacar um valor negativo.")
+        else:
+            if( valor <= self._saldo + self._limite ):
+                self._saldo -= valor
+                self._historico.insere('Saque de R${}'.format(valor))
+                return True
+            else :
+                # print("Não há saldo suficiente.")
+                # return False
+                raise SaldoInsuficienteError("Não há saldo suficiente.")
         
     def extrato(self) -> None:
         print('numero: {}'.format(self._numero))
@@ -128,14 +137,35 @@ class ContaCorrente(Conta):
         self._saldo += self._saldo * taxa * 2
         return self._saldo
         
-    def deposita(self, valor) -> bool:
-        self._saldo += valor #- 0.10 Comentando o trecho da taxa de 0.10 por depósito
-        self._historico.insere('Depósito de R${}.\nCobrada taxa de R$0.10'.format(valor))
-        return True
+    # def deposita(self, valor) -> bool:
+    #     self._saldo += valor #- 0.10 Comentando o trecho da taxa de 0.10 por depósito
+    #     self._historico.insere('Depósito de R${}.\nCobrada taxa de R$0.10'.format(valor))
+    #     return True
+
+    def saca(self,valor) -> bool:
+        if(valor < 0):
+            raise ValueError("Você tentou sacar um valor negativo.")
+        else:
+            if( valor <= self._saldo + self._limite ):
+                self._saldo -= valor + 0.10
+                self._historico.insere('Saque de R${}'.format(valor))
+                return True
+            else :
+                # print("Não há saldo suficiente.")
+                # return False
+                raise SaldoInsuficienteError("Não há saldo suficiente.")
+
+    def deposita(self,valor) -> bool:
+        if (valor < 0):
+            raise ValueError('Você tentou depositar um valor negativo.')
+        else:
+            self._saldo += valor - 0.10
+            self._historico.insere('Depósito de R${}'.format(valor))
+            return True
 
 class ContaPoupanca(Conta):
     
-    def __init__(self, cliente, saldo, limite) -> None:
+    def __init__(self, cliente, saldo, limite=0) -> None:
         super().__init__(cliente, saldo, limite)
         self._tipo = "Conta Poupança"
     
@@ -143,6 +173,26 @@ class ContaPoupanca(Conta):
         # super().atualiza(taxa*3)
         self._saldo += self._saldo * taxa * 3
         return self._saldo
+    
+    def deposita(self,valor) -> bool:
+        if (valor < 0):
+            raise ValueError('Você tentou depositar um valor negativo.')
+        else:
+            self._saldo += valor
+            self._historico.insere('Depósito de R${}'.format(valor))
+            return True
+
+    def saca(self,valor) -> bool:
+        if(valor < 0):
+            raise ValueError("Você tentou sacar um valor negativo.")
+        else:
+            if( valor <= self._saldo + self._limite ):
+                self._saldo -= valor
+                self._historico.insere('Saque de R${}'.format(valor))
+                return True
+            else :
+                print("Não há saldo suficiente.")
+                return False
     
 class ContaInvestimento(Conta):
     
@@ -164,10 +214,28 @@ if __name__ == '__main__':
     
     
     # conta = Conta(c1, 1000.00, 1500.00)
-    cc = ContaCorrente(c2, 100.00, 0)
     
-    if (not cc.saca(300.00)):
-        print("Saque não efetuado")
+    cc = ContaCorrente(c2, 1000.00, 0)
+    valor = 1500
+    
+    # try:
+    #     cc.saca(valor)
+    #     print("Saque de {} realizado com sucesso.".format(valor))
+    # except ValueError:
+    #     print("O valor a ser sacado deve ser um número positivo.")
+    # except SaldoInsuficienteError:
+    #     print("Você não possui saldo suficiente para concluir esta operação.")   
+    
+    try:
+        cc.deposita(valor)
+        print("Depósito de {} realizado com sucesso.".format(valor))
+    except ValueError:
+        print("O valor a ser depositado deve ser um número positivo.")
+    
+    
+    
+    # if (not cc.saca(300.00)):
+        # print("Saque não efetuado")
     cc.historico.log()
     # cp = ContaPoupanca(c3, 1000.00, 1500)
     # ci = ContaInvestimento(c1, 1000.00, 1500)
